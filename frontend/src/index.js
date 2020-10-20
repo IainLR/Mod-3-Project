@@ -132,7 +132,8 @@ const startGame = () => {
 const startPhase1 = () =>{
     const body = document.querySelector('body')
 
-    const canvas = document.createElement('canvas')
+    // const canvas = document.createElement('canvas')
+    const canvas = document.createElement('div')
     canvas.classList.add('canvas')
     
 
@@ -148,23 +149,11 @@ const startPhase1 = () =>{
 }
 
 const createBoard = (image) => {
-    const useImage = document.createElement('image')
-    const canvas = document.querySelector('canvas')
-    const imageCard = canvas.getContext('2d')
+    const useImage = document.createElement('img')
     useImage.setAttribute('src', image.img1)
     useImage.classList.add('board-card')
+    useImage.id = image.id
 
-    useImage.addEventListener('load', function() {
-        // execute drawImage statements here
-        imageCard.drawImage(useImage, 10, 10, 200, 200)
-      }, false);
-
-     console.log(useImage)
-
-    const body = document.querySelector('body')
-    body.append(useImage)
-    //SHOULD BE: canvas.append(useImage)
-
-    
-    
+    const canvas = document.querySelector('.canvas')
+    canvas.append(useImage)
 }

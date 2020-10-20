@@ -4,13 +4,15 @@
 }
 
 .canvas {
-    width: 600px;
-    height: 600px;
+    width: 630px;
+    height: 630px;
     background-color: slategray;
     border-style: solid;
     border-width: medium;
-    position: absolute;
-    z-index: -1;
+    position: static;
+    z-index: 0;
+    display: flex;
+    flex-flow: row wrap;
 }
 
 .board-card {
@@ -19,7 +21,7 @@
     background-color: rgb(10, 56, 102);
     border-style: solid;
     border-width: medium;
-    position: absolute;
-    z-index: 2;
-  
+    position: relative; 
+    z-index: 1;
+    flex: 0 0 32% 
 }
