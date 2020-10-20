@@ -135,14 +135,24 @@ const startPhase2 = (answerId) => {
 
     makeDodger()
 
-    // setTimeout(startPhase3, 5000, answerId)
+    setTimeout(startPhase3, 8000, answerId)
 }
 
 const startPhase3 = (answerId) => {
+    let oldChar = document.querySelector('.character')
+    let dodgerInfo = oldChar.style.cssText
+
     clearPage2()
-    console.log('answerId =', answerId)
+    console.log('answerId =', answerId, 'dodgerInfo', dodgerInfo)
 
     bodyCardsUp()
+
+    let canvas = document.querySelector('.canvas')
+    let dummyDodger = document.createElement('div');
+    dummyDodger.style.cssText = dodgerInfo
+    dummyDodger.classList.add('character')
+    dummyDodger.style.backgroundColor = "black";
+    canvas.append(dummyDodger)
 
     fetch(`http://localhost:3000/api/v1/cards/${answerId2}`)
         .then(res => res.json())
@@ -206,7 +216,7 @@ const bodyCardsUp = () => {
 const makeDodger = () => {
     let dodger = document.createElement('div');
     dodger.classList.add('character')
-    dodger.style = "bottom: 400px; left: 300px"
+    dodger.style = "bottom: 400px; left: 350px"
     let canvas = document.querySelector('.canvas')
     canvas.append(dodger)
     dodger.style.backgroundColor = "#FF69B4";
@@ -215,7 +225,7 @@ const makeDodger = () => {
         let leftNumbers = dodger.style.left.replace("px", "");
         let left = parseInt(leftNumbers, 10);
 
-        if (left > 12) {
+        if (left > 62) {
             dodger.style.left = `${left - 8}px`;
         }
     }
@@ -224,7 +234,7 @@ const makeDodger = () => {
         let leftNumbers = dodger.style.left.replace("px", "");
         let left = parseInt(leftNumbers, 10);
 
-        if (left < 572) {
+        if (left < 612) {
             dodger.style.left = `${left + 8}px`;
         }
 
