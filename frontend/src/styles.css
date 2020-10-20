@@ -50,3 +50,13 @@
 .hidden {
     display: hidden
 }
+
+
+.character {
+    background-color: pink;
+    height: 60px;
+    position: absolute;
+    width: 60px;
+
+    z-index: 999 
+}
