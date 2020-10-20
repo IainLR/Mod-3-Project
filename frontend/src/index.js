@@ -1,3 +1,6 @@
+const windowDiv = document.querySelector('.window')
+const showBox = document.querySelector('#show-box')
+
 document.addEventListener("DOMContentLoaded", () => {
     createLogIn()
 
@@ -13,29 +16,28 @@ document.addEventListener("DOMContentLoaded", () => {
 const urlBase = 'http://localhost:3000/api/v1/users'
 
 const createLogIn = () => {
-    const body = document.querySelector('body')
     const loginForm = document.createElement('form')
 
     // const charDiv = document.createElement('div')
     // charDiv.className = 'character-images'
-    
-    
+
+
     const usernameInput = document.createElement('input')
     usernameInput.type = 'text'
     usernameInput.placeholder = "Enter Your Username"
 
-    
+
     const formBtn = document.createElement('button')
     formBtn.type = 'submit'
     formBtn.innerText = "Continue"
-    
-    
+
+
     loginForm.append(usernameInput, formBtn)
     // characterImages()
     // loginForm.append(formBtn)
 
-    body.append(loginForm)
-    
+    windowDiv.append(loginForm)
+
 
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault()
@@ -50,7 +52,7 @@ const createLogIn = () => {
 
 const createUser = (username) => {
     console.log(urlBase)
-     fetch(urlBase, {
+    fetch(urlBase, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -73,14 +75,9 @@ const createUser = (username) => {
 
 }
 
-const clearPage = () => {
-    const body = document.querySelector('body')
-    body.innerHTML = ''
-}
-
 const startGame = () => {
+    clearPage()
     console.log('game on')
-    const body = document.querySelector('body')
 
     const rules = document.createElement('h1')
     rules.innerText = 'rules will go here'
@@ -88,64 +85,104 @@ const startGame = () => {
     const startBtn = document.createElement('button')
     startBtn.innerHTML = 'START GAME'
 
-    body.append(rules, startBtn)
+    windowDiv.append(rules, startBtn)
 
-    startBtn.addEventListener('click', function(e){
+    startBtn.addEventListener('click', function (e) {
         clearPage()
         console.log('game would start here')
         startPhase1()
-        
+
 
     })
 }
 
+const startPhase1 = () => {
+    const showBox = document.querySelector('.hidden')
+    showBox.classList.remove('hidden')
+    showBox.classList.add('right-side-one')
+    bodyCardsUp()
+    
+    // answer card logic
+    const answerDiv = document.createElement('div')
+    const answerImage = document.createElement('img')
+    answerImage.classList.add('answer-card')
 
-// const characterImages = () => {
-//     return fetch('http://localhost:3000/api/v1/characters')
-//     .then(res => res.json()).then(characters => characters.forEach(character => charactersOnForm(character)))
+    let array = [100, 101, 102, 103, 104, 105, 106, 107, 108]
+    let i = array[Math.floor(Math.random() * array.length)]
+    answerImage.id = i
 
-// }
+    fetch(`http://localhost:3000/api/v1/cards/${i}`)
+        .then(res => res.json())
+        .then(obj => answerImage.setAttribute('src', obj.img2))
 
-// const charactersOnForm = (character) => {
-//     console.log(character)
-//    const div = document.querySelector('.character-images')
-// //    let body = document.querySelector('body')
+    answerDiv.append(answerImage)
+    showBox.append(answerDiv)
 
-// //    const charImg = document.createElement('img')
-// //    charImg.setAttribute('src', character.img1)
-// //    charImg.className = 'form-pic'
+    const answerId = i
+    setTimeout(startPhase2, 3000, answerId)
 
-//    const characterSelect = document.createElement('input')
-//     characterSelect.setAttribute('type','image')
-//     characterSelect.setAttribute('src', character.img1)
-//     characterSelect.className = 'form-pic'
+}
 
-//    const name = document.createElement('p')
-//    name.innerText = character.name
+const startPhase2 = (answerId) => {
+    clearPage2()
+    answerId2 = answerId
+    console.log('phase 2 started', 'answerId =', answerId)
 
-//    div.append(characterSelect, name)
-
-  
-
-// }
-
-const startPhase1 = () =>{
-    const body = document.querySelector('body')
-
-    // const canvas = document.createElement('canvas')
     const canvas = document.createElement('div')
     canvas.classList.add('canvas')
-    
 
-    body.append(canvas)
+    windowDiv.append(canvas)
 
     fetch('http://localhost:3000/api/v1/cards')
+        .then(res => res.json())
+        .then(function (json) {
+            for (const img of json) {
+                createBoard2(img)
+            }
+        })
+
+    fetch(`http://localhost:3000/api/v1/cards/${answerId2}`)
+        .then(res => res.json())
+        .then(obj => answerImage.setAttribute('src', obj.img1))
+
+    const answerDiv = document.createElement('div')
+    const answerImage = document.createElement('img')
+    const showBox = document.querySelector('.right-side-one')
+    answerImage.classList.add('answer-card')
+    answerDiv.append(answerImage)
+    showBox.append(answerDiv)
+ 
+    setTimeout(startPhase3, 5000, answerId)
+}
+
+const startPhase3 = (answerId) => {
+    clearPage2()
+    console.log('answerId =', answerId)
+
+    bodyCardsUp()
+
+    fetch(`http://localhost:3000/api/v1/cards/${answerId2}`)
     .then(res => res.json())
-    .then(function(json){
-        for (const img of json){
-            createBoard(img)
-        }
-    })
+    .then(obj => answerImage.setAttribute('src', obj.img1))
+    
+    const answerDiv = document.createElement('div')
+    const answerImage = document.createElement('img')
+    const showBox = document.querySelector('.right-side-one')
+    answerImage.classList.add('answer-card')
+    answerDiv.append(answerImage)
+    showBox.append(answerDiv)
+    
+}
+
+const clearPage = () => {
+    windowDiv.innerHTML = ''
+}
+
+const clearPage2 = () => {
+    windowDiv.innerHTML = ''
+
+    const box = document.querySelector('.right-side-one')
+    box.innerHTML = ''
 }
 
 const createBoard = (image) => {
@@ -156,4 +193,29 @@ const createBoard = (image) => {
 
     const canvas = document.querySelector('.canvas')
     canvas.append(useImage)
+}
+
+const createBoard2 = (image) => {
+    const useImage = document.createElement('img')
+    useImage.setAttribute('src', image.img2)
+    useImage.classList.add('board-card')
+    useImage.id = image.id
+
+    const canvas = document.querySelector('.canvas')
+    canvas.append(useImage)
+}
+
+const bodyCardsUp = () => {
+    const canvas = document.createElement('div')
+    canvas.classList.add('canvas')
+
+    windowDiv.append(canvas)
+
+    fetch('http://localhost:3000/api/v1/cards')
+        .then(res => res.json())
+        .then(function (json) {
+            for (const img of json) {
+                createBoard(img)
+            }
+        })
 }

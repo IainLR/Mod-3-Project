@@ -8,15 +8,15 @@ c2 = Character.create(name: "Test2", img1: "https://svg-clipart.com/thumbs/blue/
 
 u1 = User.create(name: "user1", character_id: c1.id)
 
-banana = Card.create(img1: 'https://image.shutterstock.com/image-vector/set-pixel-art-icons-fruits-260nw-139005962.jpg', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png' )
-cherry = Card.create(img1: '/images/cherry.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
-kiwi = Card.create(img1: '/images/kiwi.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
-moreGrapes = Card.create(img1: '/images/moreGrapes.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
-orange = Card.create(img1: '/images/orange.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
-pineapple = Card.create(img1: '/images/Pineapple.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
-strawberry = Card.create(img1: '/images/strawberry.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
-threeGrapes = Card.create(img1: '/images/threeGrapes.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
-watermelon = Card.create(img1: 'https://image.shutterstock.com/image-vector/set-pixel-art-icons-fruits-260nw-139005962.jpg', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+banana = Card.create(img1: 'images/banana.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png' )
+cherry = Card.create(img1: 'images/cherry.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+kiwi = Card.create(img1: 'images/kiwi.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+moreGrapes = Card.create(img1: 'images/moreGrapes.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+orange = Card.create(img1: 'images/orange.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+pineapple = Card.create(img1: 'images/Pineapple.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+strawberry = Card.create(img1: 'images/strawberry.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+threeGrapes = Card.create(img1: 'images/threeGrapes.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+watermelon = Card.create(img1: 'images/watermelon.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
 
 
 puts "Success"

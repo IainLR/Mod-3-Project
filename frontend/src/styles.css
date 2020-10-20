@@ -4,8 +4,8 @@
 }
 
 .canvas {
-    width: 630px;
-    height: 630px;
+    width: 620px;
+    height: 620px;
     background-color: slategray;
     border-style: solid;
     border-width: medium;
@@ -18,10 +18,35 @@
 .board-card {
     width: 200px;
     height: 200px;
-    background-color: rgb(10, 56, 102);
+    background-color: rgb(8, 237, 253);
     border-style: solid;
     border-width: medium;
     position: relative; 
     z-index: 1;
     flex: 0 0 32% 
+}
+
+.answer-card {
+    width: 200px;
+    height: 200px;
+    background-color: rgb(8, 237, 253);
+    border-style: solid;
+    border-width: medium;
+    position: relative; 
+}
+
+.right-side-one {
+    position: fixed;
+    top: 80px;
+    right: 250px;
+    width: 300px;
+    height: 420px;
+    padding-top: 50px;
+    padding-left: 100px;
+    border-style: solid;
+    border-width: medium;
+}
+
+.hidden {
+    display: hidden
 }
