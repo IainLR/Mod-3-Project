@@ -1,5 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
     createLogIn()
+
+    // fetch('http://localhost:3000/api/v1/cards')
+    // .then(res => res.json())
+    // .then(function(json){
+    //     for (const img of json){
+    //         const hiddenImg = document.createElement('image')
+    //         hiddenImg.setAttribute('src', image.img1)
+    //         hiddenImg.classList.add('hidden')
 })
 
 const urlBase = 'http://localhost:3000/api/v1/users'
@@ -85,6 +93,7 @@ const startGame = () => {
     startBtn.addEventListener('click', function(e){
         clearPage()
         console.log('game would start here')
+        startPhase1()
         
 
     })
@@ -119,3 +128,43 @@ const startGame = () => {
   
 
 // }
+
+const startPhase1 = () =>{
+    const body = document.querySelector('body')
+
+    const canvas = document.createElement('canvas')
+    canvas.classList.add('canvas')
+    
+
+    body.append(canvas)
+
+    fetch('http://localhost:3000/api/v1/cards')
+    .then(res => res.json())
+    .then(function(json){
+        for (const img of json){
+            createBoard(img)
+        }
+    })
+}
+
+const createBoard = (image) => {
+    const useImage = document.createElement('image')
+    const canvas = document.querySelector('canvas')
+    const imageCard = canvas.getContext('2d')
+    useImage.setAttribute('src', image.img1)
+    useImage.classList.add('board-card')
+
+    useImage.addEventListener('load', function() {
+        // execute drawImage statements here
+        imageCard.drawImage(useImage, 10, 10, 200, 200)
+      }, false);
+
+     console.log(useImage)
+
+    const body = document.querySelector('body')
+    body.append(useImage)
+    //SHOULD BE: canvas.append(useImage)
+
+    
+    
+}
