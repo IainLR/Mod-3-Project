@@ -24,15 +24,12 @@ const createLogIn = () => {
 
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault()
-        console.log("clicked")
         const newUsername = usernameInput.value
-        console.log(usernameInput.value)
         createUser(newUsername)
     })
 }
 
 const createUser = (username) => {
-    console.log(urlBase)
     fetch(urlBase, {
         method: "POST",
         headers: {
@@ -43,22 +40,15 @@ const createUser = (username) => {
             name: username,
             character_id: 2
         })
-    }).then(res => res.json()).then(data => console.log(data))
+    })
     clearPage()
     //*** CLEARS PAGE AFTER LOG-IN */
     startGame()
-    //     .then(function(response){
-    //         response.json()
-    //     })
-    // .then(function(object){
-    //     console.log(object)
-    // })
 
 }
 
 const startGame = () => {
     clearPage()
-    console.log('game on')
 
     const rules = document.createElement('h1')
     rules.innerText = 'rules will go here'
@@ -70,7 +60,6 @@ const startGame = () => {
 
     startBtn.addEventListener('click', function (e) {
         clearPage()
-        console.log('game would start here')
         startPhase1()
 
 
@@ -111,7 +100,6 @@ const startPhase1 = () => {
 const startPhase2 = (answerId) => {
     clearPage2()
     answerId2 = answerId
-    console.log('phase 2 started', 'answerId =', answerId)
 
     const canvas = document.createElement('div')
     canvas.classList.add('canvas')
@@ -138,6 +126,7 @@ const startPhase2 = (answerId) => {
     showBox.append(answerDiv)
 
     makeDodger()
+    console.log(answerId)
 
     setTimeout(startPhase3, 8000, answerId)
 }
@@ -147,7 +136,6 @@ const startPhase3 = (answerId) => {
     let dodgerInfo = oldChar.style.cssText
 
     clearPage2()
-    console.log('answerId =', answerId, 'dodgerInfo', dodgerInfo)
 
     bodyCardsUp()
 
@@ -171,138 +159,132 @@ const startPhase3 = (answerId) => {
     showBox.append(answerDiv)
 
 
-    // makeAnswer(answerId)
-
-
-    // let elem = document.querySelector('.character')
-    // let rect = elem.getBoundingClientRect()
-    // for (var key in rect) {
-    //     if (typeof rect[key] !== 'function') {
-    //         let para = document.createElement('p');
-    //         para.textContent = `${key} : ${rect[key]}`;
-    //         document.body.appendChild(para);
-    //     }
-
-    // }
-
-     const getScore = (answerId) => {
+    const getScore = (answerId) => {
         let x = document.getElementById(answerId)
-        console.log('this is x', x)
-        let coordinates = x.getBoundingClientRect()
-        console.log(coordinates)
+        let cardCoordinates = x.getBoundingClientRect()
+        let characterCoordinates = dummyDodger.getBoundingClientRect()
+        console.log('card x:',cardCoordinates.x, 'card y:',cardCoordinates.y)
+        console.log('char x:',characterCoordinates.x, 'char y:', characterCoordinates.y)
+        function bottom(coordinates) {return coordinates.y + coordinates.height}
+
+         if ((characterCoordinates.y > (cardCoordinates.y + cardCoordinates.height - 30)) || ((characterCoordinates.x + characterCoordinates.width) < cardCoordinates.x + 30) || ((characterCoordinates.y + characterCoordinates.height) < cardCoordinates.y + 30) || (characterCoordinates.x > (cardCoordinates.x + cardCoordinates.width - 30))) {
+            return console.log("WRONG!")
+        } else {
+            return console.log("Success?!")
+        }
     }
     setTimeout(getScore, 0200, answerId)
-    
+
 
 }
 
-    const clearPage = () => {
-        windowDiv.innerHTML = ''
-    }
+const clearPage = () => {
+    windowDiv.innerHTML = ''
+}
 
-    const clearPage2 = () => {
-        windowDiv.innerHTML = ''
+const clearPage2 = () => {
+    windowDiv.innerHTML = ''
 
-        const box = document.querySelector('.right-side-one')
-        box.innerHTML = ''
-    }
+    const box = document.querySelector('.right-side-one')
+    box.innerHTML = ''
+}
 
-    const createBoard = (image) => {
-        const useImage = document.createElement('img')
-        useImage.setAttribute('src', image.img1)
-        useImage.classList.add('board-card')
-        useImage.id = image.id
+const createBoard = (image) => {
+    const useImage = document.createElement('img')
+    useImage.setAttribute('src', image.img1)
+    useImage.classList.add('board-card')
+    useImage.id = image.id
 
-        
 
-        const canvas = document.querySelector('.canvas')
-        canvas.append(useImage)
-    }
 
-    const createBoard2 = (image) => {
-        const useImage = document.createElement('img')
-        useImage.setAttribute('src', image.img2)
-        useImage.classList.add('board-card')
-        useImage.id = image.id
+    const canvas = document.querySelector('.canvas')
+    canvas.append(useImage)
+}
 
-        const canvas = document.querySelector('.canvas')
-        canvas.append(useImage)
-    }
+const createBoard2 = (image) => {
+    const useImage = document.createElement('img')
+    useImage.setAttribute('src', image.img2)
+    useImage.classList.add('board-card')
+    useImage.id = image.id
 
-    const bodyCardsUp = () => {
-        const canvas = document.createElement('div')
-        canvas.classList.add('canvas')
+    const canvas = document.querySelector('.canvas')
+    canvas.append(useImage)
+}
 
-        windowDiv.append(canvas)
+const bodyCardsUp = () => {
+    const canvas = document.createElement('div')
+    canvas.classList.add('canvas')
 
-        fetch('http://localhost:3000/api/v1/cards')
-            .then(res => res.json())
-            .then(function (json) {
-                for (const img of json) {
-                    createBoard(img)
-                }
-            })
-    }
+    windowDiv.append(canvas)
 
-    const makeDodger = () => {
-        let dodger = document.createElement('div');
-        dodger.classList.add('character')
-        dodger.style = "bottom: 400px; left: 350px"
-        let canvas = document.querySelector('.canvas')
-        canvas.append(dodger)
-        dodger.style.backgroundColor = "#FF69B4";
-
-        function moveDodgerLeft() {
-            let leftNumbers = dodger.style.left.replace("px", "");
-            let left = parseInt(leftNumbers, 10);
-
-            if (left > 62) {
-                dodger.style.left = `${left - 8}px`;
+    fetch('http://localhost:3000/api/v1/cards')
+        .then(res => res.json())
+        .then(function (json) {
+            for (const img of json) {
+                createBoard(img)
             }
+        })
+}
+
+const makeDodger = () => {
+    let dodger = document.createElement('div');
+    dodger.classList.add('character')
+    dodger.style = "bottom: 400px; left: 350px"
+    let canvas = document.querySelector('.canvas')
+    canvas.append(dodger)
+    dodger.style.backgroundColor = "#FF69B4";
+
+    function moveDodgerLeft() {
+        let leftNumbers = dodger.style.left.replace("px", "");
+        let left = parseInt(leftNumbers, 10);
+
+        if (left > 62) {
+            dodger.style.left = `${left - 8}px`;
+        }
+    }
+
+    function moveDodgerRight() {
+        let leftNumbers = dodger.style.left.replace("px", "");
+        let left = parseInt(leftNumbers, 10);
+
+        if (left < 612) {
+            dodger.style.left = `${left + 8}px`;
         }
 
-        function moveDodgerRight() {
-            let leftNumbers = dodger.style.left.replace("px", "");
-            let left = parseInt(leftNumbers, 10);
-
-            if (left < 612) {
-                dodger.style.left = `${left + 8}px`;
-            }
-
-        }
-
-        function moveDodgerDown() {
-            let bottomNumbers = dodger.style.bottom.replace("px", "");
-            let bottom = parseInt(bottomNumbers, 10);
-
-            if (bottom > 96) {
-                dodger.style.bottom = `${bottom - 8}px`;
-            }
-        }
-
-        function moveDodgerUp() {
-            let bottomNumbers = dodger.style.bottom.replace("px", "");
-            let bottom = parseInt(bottomNumbers, 10);
-
-            if (bottom < 654) {
-                dodger.style.bottom = `${bottom + 8}px`;
-            }
-        }
-
-
-        document.addEventListener("keydown", function (e) {
-            if (e.key === "ArrowLeft") {
-                moveDodgerLeft();
-            }
-            if (e.key === "ArrowRight") {
-                moveDodgerRight();
-            }
-            if (e.key === "ArrowDown") {
-                moveDodgerDown()
-            }
-            if (e.key === "ArrowUp") {
-                moveDodgerUp()
-            }
-        });
     }
+
+    function moveDodgerDown() {
+        let bottomNumbers = dodger.style.bottom.replace("px", "");
+        let bottom = parseInt(bottomNumbers, 10);
+
+        if (bottom > 96) {
+            dodger.style.bottom = `${bottom - 8}px`;
+        }
+    }
+
+    function moveDodgerUp() {
+        let bottomNumbers = dodger.style.bottom.replace("px", "");
+        let bottom = parseInt(bottomNumbers, 10);
+
+        if (bottom < 654) {
+            dodger.style.bottom = `${bottom + 8}px`;
+        }
+    }
+
+
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft") {
+            moveDodgerLeft();
+        }
+        if (e.key === "ArrowRight") {
+            moveDodgerRight();
+        }
+        if (e.key === "ArrowDown") {
+            moveDodgerDown()
+        }
+        if (e.key === "ArrowUp") {
+            moveDodgerUp()
+        }
+    });
+}
 
