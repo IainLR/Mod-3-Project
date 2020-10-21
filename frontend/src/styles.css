@@ -43,10 +43,22 @@ body {
     position: absolute;
     top: 80px;
     right: 250px;
-    width: 300px;
-    height: 420px;
+    width: 250px;
+    height: 250px;
     padding-top: 50px;
-    padding-left: 100px;
+    padding-left: 50px;
+    border-style: solid;
+    border-width: medium;
+}
+
+.right-side-two {
+    position: absolute;
+    top: 400px;
+    right: 250px;
+    width: 250px;
+    height: 300px;
+    padding-top: 10px;
+    padding-left: 50px;
     border-style: solid;
     border-width: medium;
 }

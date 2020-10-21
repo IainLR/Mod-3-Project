@@ -67,9 +67,13 @@ const startGame = () => {
 }
 
 const startPhase1 = () => {
-    const showBox = document.querySelector('.hidden')
+    windowDiv.innerHTML = ''
+
+    let showBox = document.querySelector('.hidden')
     showBox.classList.remove('hidden')
     showBox.classList.add('right-side-one')
+    scoreBox()
+
     bodyCardsUp()
 
     // answer card logic
@@ -86,6 +90,7 @@ const startPhase1 = () => {
         .then(obj => answerImage.setAttribute('src', obj.img2))
 
     answerDiv.append(answerImage)
+    console.log(showBox, 'AND', answerDiv)
     showBox.append(answerDiv)
 
     const answerId = i
@@ -96,6 +101,36 @@ const startPhase1 = () => {
 
 
 }
+
+const startPhase1Alt = () => {
+    windowDiv.innerHTML = ''
+
+    let showBox = document.querySelector('.right-side-one')
+    showBox.innerHTML = ''
+    const answerDiv = document.createElement('div')
+    const answerImage = document.createElement('img')
+    answerImage.classList.add('answer-card')
+
+    bodyCardsUp()
+
+    let array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    let i = array[Math.floor(Math.random() * array.length)]
+    answerImage.id = i
+
+    fetch(`http://localhost:3000/api/v1/cards/${i}`)
+        .then(res => res.json())
+        .then(obj => answerImage.setAttribute('src', obj.img2))
+
+    answerDiv.append(answerImage)
+    console.log(showBox, 'AND', answerDiv)
+    showBox.append(answerDiv)
+
+    const answerId = i
+
+    setTimeout(startPhase2, 6000, answerId)
+
+}
+
 // MOVING THING GOES HERE 
 const startPhase2 = (answerId) => {
     clearPage2()
@@ -163,17 +198,50 @@ const startPhase3 = (answerId) => {
         let x = document.getElementById(answerId)
         let cardCoordinates = x.getBoundingClientRect()
         let characterCoordinates = dummyDodger.getBoundingClientRect()
-        console.log('card x:',cardCoordinates.x, 'card y:',cardCoordinates.y)
-        console.log('char x:',characterCoordinates.x, 'char y:', characterCoordinates.y)
-        function bottom(coordinates) {return coordinates.y + coordinates.height}
 
-         if ((characterCoordinates.y > (cardCoordinates.y + cardCoordinates.height - 30)) || ((characterCoordinates.x + characterCoordinates.width) < cardCoordinates.x + 30) || ((characterCoordinates.y + characterCoordinates.height) < cardCoordinates.y + 30) || (characterCoordinates.x > (cardCoordinates.x + cardCoordinates.width - 30))) {
-            return console.log("WRONG!")
+        const score = document.querySelector('.score')
+        const strikes = document.querySelector('.strikes')
+        const streak = document.querySelector('.streak')
+
+        function bottom(coordinates) { return coordinates.y + coordinates.height }
+
+        if ((characterCoordinates.y > (cardCoordinates.y + cardCoordinates.height - 30)) || ((characterCoordinates.x + characterCoordinates.width) < cardCoordinates.x + 30) || ((characterCoordinates.y + characterCoordinates.height) < cardCoordinates.y + 30) || (characterCoordinates.x > (cardCoordinates.x + cardCoordinates.width - 30))) {
+            console.log("WRONG!")
+            dummyDodger.style.backgroundColor = "red"
+            let oldValueStrike = parseInt(strikes.innerHTML)
+            console.log(oldValueStrike)
+            strikes.innerHTML = oldValueStrike + 1
+            streak.innerHTML = '0'
+
         } else {
-            return console.log("Success?!")
+            console.log("Success?!")
+            dummyDodger.style.backgroundColor = "green"
+            let streakCounter = parseInt(streak.innerHTML) + 1
+            streak.innerHTML = streakCounter
+            console.log(streakCounter)
+            let streakModifier
+            if(streakCounter < 3) {
+                 streakModifier = 1
+            }
+            if(streakCounter < 9 && streakCounter >= 3){
+                 streakModifier = 1.25
+            }
+            if(streakCounter >= 9){
+                streakModifier = 1.5
+            }
+
+            console.log('modifier', streakModifier)
+            let scoreUpdate = parseInt(score.innerHTML) + 100 * streakModifier
+            score.innerHTML = scoreUpdate
+
+            // score.innerHTML = parseInt(score.innerHTML) + 100
         }
     }
     setTimeout(getScore, 0200, answerId)
+
+
+
+    setTimeout(roundLoop, 5000)
 
 
 }
@@ -288,3 +356,45 @@ const makeDodger = () => {
     });
 }
 
+const scoreBox = () => {
+    const going = document.querySelector('right-side-two')
+
+    console.log(going)
+
+    if (going === null) {
+
+        const rightSideTwo = document.createElement('div')
+        rightSideTwo.classList.add('right-side-two')
+        const body = document.querySelector('body')
+        body.append(rightSideTwo)
+
+        const scoreBar = document.createElement('h1')
+        scoreBar.innerText = "SCORE"
+        const scoreBar2 = document.createElement('h2')
+        scoreBar2.classList.add('score')
+        scoreBar2.innerText = "0"
+
+        const strikeBar = document.createElement('h2')
+        strikeBar.innerHTML = "STRIKES "
+        const strikeBar2 = document.createElement('h2')
+        strikeBar2.classList.add('strikes')
+        strikeBar2.innerHTML = "0"
+
+        const streakBar = document.createElement('h2')
+        streakBar.innerHTML = "STREAK"
+        const streakBar2 = document.createElement('h2')
+        streakBar2.innerHTML = "0"
+        streakBar2.classList.add('streak')
+
+        rightSideTwo.append(scoreBar, scoreBar2, strikeBar, strikeBar2, streakBar, streakBar2)
+
+    }
+
+
+}
+
+const roundLoop = () => {
+    // if strikes < 3 do
+    startPhase1Alt()
+    // else POST score and create game object
+}
