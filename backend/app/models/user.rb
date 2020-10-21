@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-    has_many :games
-    has_many :rounds, through: :games
+    has_many :rounds
     belongs_to :character
 end
