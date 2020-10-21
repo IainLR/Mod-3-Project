@@ -9,4 +9,5 @@ class Api::V1::CardsController < ApplicationController
         card = Card.find(params[:id])
         render json: card
     end
+    
 end
