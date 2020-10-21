@@ -101,8 +101,10 @@ const startPhase1 = () => {
 
     const answerId = i
 
+
     // answerImage.addEventListener("load", makeAnswer(answerId));
     setTimeout(startPhase2, 1000, answerId)
+
 
 }
 // MOVING THING GOES HERE 
@@ -136,7 +138,7 @@ const startPhase2 = (answerId) => {
     showBox.append(answerDiv)
 
     makeDodger()
-    
+
     setTimeout(startPhase3, 8000, answerId)
 }
 
@@ -156,7 +158,6 @@ const startPhase3 = (answerId) => {
     dummyDodger.style.backgroundColor = "black";
     canvas.append(dummyDodger)
 
-    // dummyDodger.addEventListener("click", makeAnswer(answerId));
 
     fetch(`http://localhost:3000/api/v1/cards/${answerId2}`)
         .then(res => res.json())
@@ -168,6 +169,7 @@ const startPhase3 = (answerId) => {
     answerImage.classList.add('answer-card')
     answerDiv.append(answerImage)
     showBox.append(answerDiv)
+
 
     // makeAnswer(answerId)
 
@@ -191,6 +193,7 @@ const startPhase3 = (answerId) => {
     }
     setTimeout(getScore, 0200, answerId)
     
+
 }
 
     const clearPage = () => {
