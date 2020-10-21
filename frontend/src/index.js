@@ -1,40 +1,23 @@
 const windowDiv = document.querySelector('.window')
 const showBox = document.querySelector('#show-box')
+const urlBase = 'http://localhost:3000/api/v1/users'
 
 document.addEventListener("DOMContentLoaded", () => {
     createLogIn()
-
-    // fetch('http://localhost:3000/api/v1/cards')
-    // .then(res => res.json())
-    // .then(function(json){
-    //     for (const img of json){
-    //         const hiddenImg = document.createElement('image')
-    //         hiddenImg.setAttribute('src', image.img1)
-    //         hiddenImg.classList.add('hidden')
 })
-
-const urlBase = 'http://localhost:3000/api/v1/users'
 
 const createLogIn = () => {
     const loginForm = document.createElement('form')
-
-    // const charDiv = document.createElement('div')
-    // charDiv.className = 'character-images'
-
 
     const usernameInput = document.createElement('input')
     usernameInput.type = 'text'
     usernameInput.placeholder = "Enter Your Username"
 
-
     const formBtn = document.createElement('button')
     formBtn.type = 'submit'
     formBtn.innerText = "Continue"
 
-
     loginForm.append(usernameInput, formBtn)
-    // characterImages()
-    // loginForm.append(formBtn)
 
     windowDiv.append(loginForm)
 
@@ -44,9 +27,7 @@ const createLogIn = () => {
         console.log("clicked")
         const newUsername = usernameInput.value
         console.log(usernameInput.value)
-        //render new form
         createUser(newUsername)
-        // characterSelectForm()
     })
 }
 
@@ -101,13 +82,13 @@ const startPhase1 = () => {
     showBox.classList.remove('hidden')
     showBox.classList.add('right-side-one')
     bodyCardsUp()
-    
+
     // answer card logic
     const answerDiv = document.createElement('div')
     const answerImage = document.createElement('img')
     answerImage.classList.add('answer-card')
 
-    let array = [100, 101, 102, 103, 104, 105, 106, 107, 108]
+    let array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     let i = array[Math.floor(Math.random() * array.length)]
     answerImage.id = i
 
@@ -119,10 +100,12 @@ const startPhase1 = () => {
     showBox.append(answerDiv)
 
     const answerId = i
-    setTimeout(startPhase2, 3000, answerId)
+
+    // answerImage.addEventListener("load", makeAnswer(answerId));
+    setTimeout(startPhase2, 1000, answerId)
 
 }
-
+// MOVING THING GOES HERE 
 const startPhase2 = (answerId) => {
     clearPage2()
     answerId2 = answerId
@@ -151,71 +134,172 @@ const startPhase2 = (answerId) => {
     answerImage.classList.add('answer-card')
     answerDiv.append(answerImage)
     showBox.append(answerDiv)
- 
-    setTimeout(startPhase3, 5000, answerId)
+
+    makeDodger()
+    
+    setTimeout(startPhase3, 8000, answerId)
 }
 
 const startPhase3 = (answerId) => {
+    let oldChar = document.querySelector('.character')
+    let dodgerInfo = oldChar.style.cssText
+
     clearPage2()
-    console.log('answerId =', answerId)
+    console.log('answerId =', answerId, 'dodgerInfo', dodgerInfo)
 
     bodyCardsUp()
 
+    let canvas = document.querySelector('.canvas')
+    let dummyDodger = document.createElement('div');
+    dummyDodger.style.cssText = dodgerInfo
+    dummyDodger.classList.add('character')
+    dummyDodger.style.backgroundColor = "black";
+    canvas.append(dummyDodger)
+
+    // dummyDodger.addEventListener("click", makeAnswer(answerId));
+
     fetch(`http://localhost:3000/api/v1/cards/${answerId2}`)
-    .then(res => res.json())
-    .then(obj => answerImage.setAttribute('src', obj.img1))
-    
+        .then(res => res.json())
+        .then(obj => answerImage.setAttribute('src', obj.img1))
+
     const answerDiv = document.createElement('div')
     const answerImage = document.createElement('img')
     const showBox = document.querySelector('.right-side-one')
     answerImage.classList.add('answer-card')
     answerDiv.append(answerImage)
     showBox.append(answerDiv)
+
+    // makeAnswer(answerId)
+
+
+    // let elem = document.querySelector('.character')
+    // let rect = elem.getBoundingClientRect()
+    // for (var key in rect) {
+    //     if (typeof rect[key] !== 'function') {
+    //         let para = document.createElement('p');
+    //         para.textContent = `${key} : ${rect[key]}`;
+    //         document.body.appendChild(para);
+    //     }
+
+    // }
+
+     const getScore = (answerId) => {
+        let x = document.getElementById(answerId)
+        console.log('this is x', x)
+        let coordinates = x.getBoundingClientRect()
+        console.log(coordinates)
+    }
+    setTimeout(getScore, 0200, answerId)
     
 }
 
-const clearPage = () => {
-    windowDiv.innerHTML = ''
-}
+    const clearPage = () => {
+        windowDiv.innerHTML = ''
+    }
 
-const clearPage2 = () => {
-    windowDiv.innerHTML = ''
+    const clearPage2 = () => {
+        windowDiv.innerHTML = ''
 
-    const box = document.querySelector('.right-side-one')
-    box.innerHTML = ''
-}
+        const box = document.querySelector('.right-side-one')
+        box.innerHTML = ''
+    }
 
-const createBoard = (image) => {
-    const useImage = document.createElement('img')
-    useImage.setAttribute('src', image.img1)
-    useImage.classList.add('board-card')
-    useImage.id = image.id
+    const createBoard = (image) => {
+        const useImage = document.createElement('img')
+        useImage.setAttribute('src', image.img1)
+        useImage.classList.add('board-card')
+        useImage.id = image.id
 
-    const canvas = document.querySelector('.canvas')
-    canvas.append(useImage)
-}
+        
 
-const createBoard2 = (image) => {
-    const useImage = document.createElement('img')
-    useImage.setAttribute('src', image.img2)
-    useImage.classList.add('board-card')
-    useImage.id = image.id
+        const canvas = document.querySelector('.canvas')
+        canvas.append(useImage)
+    }
 
-    const canvas = document.querySelector('.canvas')
-    canvas.append(useImage)
-}
+    const createBoard2 = (image) => {
+        const useImage = document.createElement('img')
+        useImage.setAttribute('src', image.img2)
+        useImage.classList.add('board-card')
+        useImage.id = image.id
 
-const bodyCardsUp = () => {
-    const canvas = document.createElement('div')
-    canvas.classList.add('canvas')
+        const canvas = document.querySelector('.canvas')
+        canvas.append(useImage)
+    }
 
-    windowDiv.append(canvas)
+    const bodyCardsUp = () => {
+        const canvas = document.createElement('div')
+        canvas.classList.add('canvas')
 
-    fetch('http://localhost:3000/api/v1/cards')
-        .then(res => res.json())
-        .then(function (json) {
-            for (const img of json) {
-                createBoard(img)
+        windowDiv.append(canvas)
+
+        fetch('http://localhost:3000/api/v1/cards')
+            .then(res => res.json())
+            .then(function (json) {
+                for (const img of json) {
+                    createBoard(img)
+                }
+            })
+    }
+
+    const makeDodger = () => {
+        let dodger = document.createElement('div');
+        dodger.classList.add('character')
+        dodger.style = "bottom: 400px; left: 350px"
+        let canvas = document.querySelector('.canvas')
+        canvas.append(dodger)
+        dodger.style.backgroundColor = "#FF69B4";
+
+        function moveDodgerLeft() {
+            let leftNumbers = dodger.style.left.replace("px", "");
+            let left = parseInt(leftNumbers, 10);
+
+            if (left > 62) {
+                dodger.style.left = `${left - 8}px`;
             }
-        })
-}
+        }
+
+        function moveDodgerRight() {
+            let leftNumbers = dodger.style.left.replace("px", "");
+            let left = parseInt(leftNumbers, 10);
+
+            if (left < 612) {
+                dodger.style.left = `${left + 8}px`;
+            }
+
+        }
+
+        function moveDodgerDown() {
+            let bottomNumbers = dodger.style.bottom.replace("px", "");
+            let bottom = parseInt(bottomNumbers, 10);
+
+            if (bottom > 96) {
+                dodger.style.bottom = `${bottom - 8}px`;
+            }
+        }
+
+        function moveDodgerUp() {
+            let bottomNumbers = dodger.style.bottom.replace("px", "");
+            let bottom = parseInt(bottomNumbers, 10);
+
+            if (bottom < 654) {
+                dodger.style.bottom = `${bottom + 8}px`;
+            }
+        }
+
+
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "ArrowLeft") {
+                moveDodgerLeft();
+            }
+            if (e.key === "ArrowRight") {
+                moveDodgerRight();
+            }
+            if (e.key === "ArrowDown") {
+                moveDodgerDown()
+            }
+            if (e.key === "ArrowUp") {
+                moveDodgerUp()
+            }
+        });
+    }
+
