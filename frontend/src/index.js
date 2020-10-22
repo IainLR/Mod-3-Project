@@ -134,7 +134,7 @@ const startPhase1 = () => {
     
     const answerId = i
     
-    bananaMan()
+    
 
 
 
@@ -271,9 +271,11 @@ const startPhase3 = (answerId, thisSet) => {
             }
             if (streakCounter < 9 && streakCounter >= 3) {
                 streakModifier = 1.25
+                bananaMan()
             }
             if (streakCounter >= 9) {
                 streakModifier = 1.5
+                bananaMan()
             }
 
             console.log('modifier', streakModifier)
@@ -319,7 +321,7 @@ const endGameScreen = () => {
     let userScore = document.querySelector('.score')
     let usernameScoreCombo = document.createElement('h2')
     usernameScoreCombo.classList.add('your-results')
-    usernameScoreCombo.innerText = `Name: ${userName.innerText}, Your Score: ${userScore.innerText}`
+    usernameScoreCombo.innerText = `Name: ${userName.innerText}   Your Score: ${userScore.innerText}`
     body.innerHTML = ''
     let gameOver = document.createElement('h1')
     gameOver.innerText = "GAME OVER"
@@ -362,7 +364,7 @@ const leaderBoard = (div) => {
 
     function findUser(round, div){
             let nameScore = document.createElement('h3')
-            nameScore.innerText = `name: ${round.user.name} Score: ${round.score}`
+            nameScore.innerText = `name: ${round.user.name}   Score: ${round.score}`
             nameScore.classList.add('nameScore')
             div.append(nameScore) 
     }
@@ -469,7 +471,7 @@ const makeDodger = () => {
         let bottomNumbers = dodger.style.bottom.replace("px", "");
         let bottom = parseInt(bottomNumbers, 10);
 
-        if (bottom > 96) {
+        if (bottom > 75) {
             dodger.style.bottom = `${bottom - 8}px`;
         }
     }
@@ -478,7 +480,7 @@ const makeDodger = () => {
         let bottomNumbers = dodger.style.bottom.replace("px", "");
         let bottom = parseInt(bottomNumbers, 10);
 
-        if (bottom < 654) {
+        if (bottom < 625) {
             dodger.style.bottom = `${bottom + 8}px`;
         }
     }
