@@ -305,7 +305,55 @@ const postScore = () => {
 const endGameScreen = () => {
     console.log('got to end game')
     let body = document.querySelector('body')
+    body.style = 'padding-left: 0px'
     body.innerHTML = ''
+    let gameOver = document.createElement('h2')
+    gameOver.innerText = "GAME OVER"
+    gameOver.classList.add('game-over')
+
+    let tryAgnBtn = document.createElement('button')
+    tryAgnBtn.innerText = "Try Again?"
+    tryAgnBtn.classList.add('tryAgn-btn')
+    let homeScreenBtn = document.createElement('button')
+    homeScreenBtn.innerText = "Home Screen"
+    homeScreenBtn.classList.add('home-btn')
+
+
+    let endDiv = document.createElement('div')
+    endDiv.classList.add('end-container')
+    endDiv.append(gameOver)
+    body.append(endDiv, tryAgnBtn, homeScreenBtn)
+
+    tryAgnBtn.addEventListener('click', () => {
+        console.log('try again click')
+        // startPhase1Alt()
+        location.reload()
+    })
+    homeScreenBtn.addEventListener('click', () => {
+        console.log("home screen click")
+        // createLogIn()
+    })
+    leaderBoard(endDiv)
+}
+
+const leaderBoard = (div) => {
+    fetch('http://localhost:3000/api/v1/rounds')
+    .then(res => res.json()).then(function(rounds){
+        // let sortedRounds = rounds.sort((a, b) => b.score - a.score)
+        rounds.forEach(round => findUser(round, div))
+    })
+
+    function findUser(round, div){
+        // let div = div
+       let userId = round.user_id
+       fetch(`http://localhost:3000/api/v1/users/${userId}`)
+       .then(res => res.json()).then(function(user) {
+            let nameScore = document.createElement('h3')
+            nameScore.innerText = `name: ${user.name} Score: ${round.score}`
+            nameScore.classList.add('nameScore')
+            div.append(nameScore)
+       })
+    }
 }
 
 

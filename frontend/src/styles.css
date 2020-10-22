@@ -100,3 +100,26 @@ body {
 
     z-index: 999 
 }
+
+.game-over{
+    text-align: center
+}
+.home-btn {
+    text-align: center;
+    position: absolute;
+    line-height: 80%;
+    left: 52%;
+}
+.tryAgn-btn{
+    text-align: center;
+    position: absolute;
+    line-height: 80%;
+    left: 43%;
+}
+.end-container{
+    padding-top: 70px;
+}
+.nameScore{
+    text-align: center;
+    
+}
