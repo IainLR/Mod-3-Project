@@ -315,8 +315,13 @@ const endGameScreen = () => {
     console.log('got to end game')
     let body = document.querySelector('body')
     body.style = 'padding-left: 0px'
+    let userName = document.querySelector('h1')
+    let userScore = document.querySelector('.score')
+    let usernameScoreCombo = document.createElement('h2')
+    usernameScoreCombo.classList.add('your-results')
+    usernameScoreCombo.innerText = `Name: ${userName.innerText}, Your Score: ${userScore.innerText}`
     body.innerHTML = ''
-    let gameOver = document.createElement('h2')
+    let gameOver = document.createElement('h1')
     gameOver.innerText = "GAME OVER"
     gameOver.classList.add('game-over')
 
@@ -330,7 +335,7 @@ const endGameScreen = () => {
 
     let endDiv = document.createElement('div')
     endDiv.classList.add('end-container')
-    endDiv.append(gameOver)
+    endDiv.append(gameOver, usernameScoreCombo)
     body.append(endDiv, tryAgnBtn, homeScreenBtn)
 
     tryAgnBtn.addEventListener('click', () => {
@@ -348,20 +353,18 @@ const endGameScreen = () => {
 const leaderBoard = (div) => {
     fetch('http://localhost:3000/api/v1/rounds')
     .then(res => res.json()).then(function(rounds){
-        // let sortedRounds = rounds.sort((a, b) => b.score - a.score)
-        rounds.forEach(round => findUser(round, div))
+        console.log("unordered rounds", rounds)
+        let sortedRounds = rounds.sort((a, b) => {return b.score - a.score})
+        console.log("theoretically sorted rounds", sortedRounds)
+        let limitedRounds = sortedRounds.slice(0, 10)
+        limitedRounds.forEach(round => findUser(round, div))
     })
 
     function findUser(round, div){
-        // let div = div
-       let userId = round.user_id
-       fetch(`http://localhost:3000/api/v1/users/${userId}`)
-       .then(res => res.json()).then(function(user) {
             let nameScore = document.createElement('h3')
-            nameScore.innerText = `name: ${user.name} Score: ${round.score}`
+            nameScore.innerText = `name: ${round.user.name} Score: ${round.score}`
             nameScore.classList.add('nameScore')
-            div.append(nameScore)
-       })
+            div.append(nameScore) 
     }
 }
 

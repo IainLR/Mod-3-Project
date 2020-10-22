@@ -145,6 +145,7 @@ body {
     
 }
 
+
 .right-side-two, .board-card {
 	background: linear-gradient(-45deg, #ee7752, #fd5e9b, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
@@ -161,4 +162,7 @@ body {
 	100% {
 		background-position: 0% 50%;
 	}
+
+.your-results{
+    text-align: center
 }
