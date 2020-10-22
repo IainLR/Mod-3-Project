@@ -4,6 +4,7 @@ namespace :api do
   namespace :v1 do
     resources :users
     resources :cards 
+    resources :altcards
     resources :rounds
     resources :characters 
   end
