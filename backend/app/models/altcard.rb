@@ -1,0 +1,2 @@
+class Altcard < ApplicationRecord
+end

@@ -110,46 +110,52 @@ const startPhase1 = () => {
     showBox.classList.add('right-side-one')
     scoreBox()
 
-    bodyCardsUp()
-
+    let thisSet = bodyCardsUp()
+    console.log('thisSet phase1', thisSet)
+    
     // answer card logic
     const answerDiv = document.createElement('div')
     const answerImage = document.createElement('img')
     answerImage.classList.add('answer-card')
-
+    
     let array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     let i = array[Math.floor(Math.random() * array.length)]
     answerImage.id = i
-
-    fetch(`http://localhost:3000/api/v1/cards/${i}`)
-        .then(res => res.json())
-        .then(obj => answerImage.setAttribute('src', obj.img2))
-
+    
+    fetch(`http://localhost:3000/api/v1/${thisSet}/${i}`)
+    .then(res => res.json())
+    .then(obj => answerImage.setAttribute('src', obj.img2))
+    
     answerDiv.append(answerImage)
     console.log(showBox, 'AND', answerDiv)
     showBox.append(answerDiv)
-
+    
     const answerId = i
+    
+  
 
-    setTimeout(startPhase2, 6000, answerId)
+
+
+
+    setTimeout(startPhase2, 6000, answerId, thisSet)
 }
 
 const startPhase1Alt = () => {
     windowDiv.innerHTML = ''
-
+    
     let showBox = document.querySelector('.right-side-one')
     showBox.innerHTML = ''
     const answerDiv = document.createElement('div')
     const answerImage = document.createElement('img')
     answerImage.classList.add('answer-card')
 
-    bodyCardsUp()
+    let thisSet = bodyCardsUp()
 
     let array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     let i = array[Math.floor(Math.random() * array.length)]
     answerImage.id = i
 
-    fetch(`http://localhost:3000/api/v1/cards/${i}`)
+    fetch(`http://localhost:3000/api/v1/${thisSet}/${i}`)
         .then(res => res.json())
         .then(obj => answerImage.setAttribute('src', obj.img2))
 
@@ -159,12 +165,12 @@ const startPhase1Alt = () => {
 
     const answerId = i
 
-    setTimeout(startPhase2, 6000, answerId)
+    setTimeout(startPhase2, 6000, answerId, thisSet)
 
 }
 
 // MOVING THING GOES HERE 
-const startPhase2 = (answerId) => {
+const startPhase2 = (answerId, thisSet) => {
     clearPage2()
     answerId2 = answerId
 
@@ -173,7 +179,7 @@ const startPhase2 = (answerId) => {
 
     windowDiv.append(canvas)
 
-    fetch('http://localhost:3000/api/v1/cards')
+    fetch(`http://localhost:3000/api/v1/${thisSet}`)
         .then(res => res.json())
         .then(function (json) {
             for (const img of json) {
@@ -181,7 +187,7 @@ const startPhase2 = (answerId) => {
             }
         })
 
-    fetch(`http://localhost:3000/api/v1/cards/${answerId2}`)
+    fetch(`http://localhost:3000/api/v1/${thisSet}/${answerId2}`)
         .then(res => res.json())
         .then(obj => answerImage.setAttribute('src', obj.img1))
 
@@ -195,16 +201,16 @@ const startPhase2 = (answerId) => {
     makeDodger()
     console.log(answerId)
 
-    setTimeout(startPhase3, 8000, answerId)
+    setTimeout(startPhase3, 8000, answerId, thisSet)
 }
 
-const startPhase3 = (answerId) => {
+const startPhase3 = (answerId, thisSet) => {
     let oldChar = document.querySelector('.character')
     let dodgerInfo = oldChar.style.cssText
 
     clearPage2()
 
-    bodyCardsUp()
+    bodyCardsUpAlt(thisSet)
 
     let canvas = document.querySelector('.canvas')
     let dummyDodger = document.createElement('div');
@@ -214,7 +220,7 @@ const startPhase3 = (answerId) => {
     canvas.append(dummyDodger)
 
 
-    fetch(`http://localhost:3000/api/v1/cards/${answerId2}`)
+    fetch(`http://localhost:3000/api/v1/${thisSet}/${answerId2}`)
         .then(res => res.json())
         .then(obj => answerImage.setAttribute('src', obj.img1))
 
@@ -396,13 +402,34 @@ const bodyCardsUp = () => {
 
     windowDiv.append(canvas)
 
-    fetch('http://localhost:3000/api/v1/cards')
+    let array = ['cards', 'altcards']
+    let i = array[Math.floor(Math.random() * array.length)]
+    useThis = i
+
+    fetch(`http://localhost:3000/api/v1/${useThis}`)
         .then(res => res.json())
         .then(function (json) {
             for (const img of json) {
                 createBoard(img)
             }
         })
+    return useThis
+}
+
+const bodyCardsUpAlt = (thisSet) => {
+    const canvas = document.createElement('div')
+    canvas.classList.add('canvas')
+
+    windowDiv.append(canvas)
+
+    fetch(`http://localhost:3000/api/v1/${thisSet}`)
+        .then(res => res.json())
+        .then(function (json) {
+            for (const img of json) {
+                createBoard(img)
+            }
+        })
+    return useThis
 }
 
 const makeDodger = () => {

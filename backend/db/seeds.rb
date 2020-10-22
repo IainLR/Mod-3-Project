@@ -18,6 +18,15 @@ strawberry = Card.create(img1: 'images/strawberry.png', img2: 'https://www.pngke
 threeGrapes = Card.create(img1: 'images/threeGrapes.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
 watermelon = Card.create(img1: 'images/watermelon.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
 
+altstrawberry = Altcard.create(img1: 'images/strawberry.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+altthreeGrapes = Altcard.create(img1: 'images/threeGrapes.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+altcherry = Altcard.create(img1: 'images/cherry.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+altmoreGrapes = Altcard.create(img1: 'images/moreGrapes.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+altwatermelon = Altcard.create(img1: 'images/watermelon.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+altorange = Altcard.create(img1: 'images/orange.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+altbanana = Altcard.create(img1: 'images/banana.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png' )
+altpineapple = Altcard.create(img1: 'images/Pineapple.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+altkiwi = Altcard.create(img1: 'images/kiwi.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
 
 puts "Success"
 
