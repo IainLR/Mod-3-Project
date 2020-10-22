@@ -259,7 +259,7 @@ const startPhase3 = (answerId, thisSet) => {
                 setTimeout(roundLoop, 5000)
             }
 
-        } else {
+        }else{
             console.log("Success?!")
             dummyDodger.style.backgroundColor = "green"
             let streakCounter = parseInt(streak.innerHTML) + 1
@@ -444,9 +444,19 @@ const makeDodger = () => {
     let dodger = document.createElement('div');
     dodger.classList.add('character')
     dodger.style = "bottom: 400px; left: 350px"
+
+    let charAnimationWrapper = document.createElement('div')
+    charAnimationWrapper.classList.add('character-animation__wrapper')
+
+    let charAnimation = document.createElement('div')
+    charAnimation.classList.add('character-animation')
+
     let canvas = document.querySelector('.canvas')
     canvas.append(dodger)
-    dodger.style.backgroundColor = "#FF69B4";
+    dodger.append(charAnimationWrapper)
+    charAnimationWrapper.append(charAnimation)
+
+    // dodger.style.backgroundColor = "#FF69B4";
 
     function moveDodgerLeft() {
         let leftNumbers = dodger.style.left.replace("px", "");
@@ -454,6 +464,8 @@ const makeDodger = () => {
 
         if (left > 62) {
             dodger.style.left = `${left - 8}px`;
+            charAnimationWrapper.className = 'character-animation-left__wrapper'
+            charAnimation.className = 'character-animation-left'
         }
     }
 
@@ -463,6 +475,9 @@ const makeDodger = () => {
 
         if (left < 612) {
             dodger.style.left = `${left + 8}px`;
+            charAnimationWrapper.className = 'character-animation__wrapper'
+            charAnimation.className = 'character-animation'
+            //set bacground image with each px change
         }
 
     }
@@ -473,6 +488,8 @@ const makeDodger = () => {
 
         if (bottom > 75) {
             dodger.style.bottom = `${bottom - 8}px`;
+            charAnimationWrapper.className = 'character-animation-left__wrapper'
+            charAnimation.className = 'character-animation-left'
         }
     }
 
@@ -482,6 +499,8 @@ const makeDodger = () => {
 
         if (bottom < 625) {
             dodger.style.bottom = `${bottom + 8}px`;
+            charAnimationWrapper.className = 'character-animation__wrapper'
+            charAnimation.className = 'character-animation'
         }
     }
 
