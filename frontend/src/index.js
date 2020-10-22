@@ -14,6 +14,7 @@ const createLogIn = () => {
     usernameInput.placeholder = "Enter Your Username"
 
     const formBtn = document.createElement('button')
+    formBtn.classList.add('start-btn')
     formBtn.type = 'submit'
     formBtn.innerText = "Continue"
 
