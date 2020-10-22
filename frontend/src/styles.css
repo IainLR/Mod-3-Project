@@ -7,7 +7,7 @@ body {
 
 .start-btn{
     text-align: center;
-    font-family: 'Press Start 2P', cursive;
+    
 }
 
 
@@ -35,13 +35,11 @@ body {
 .canvas {
     width: 620px;
     height: 620px;
-    background-color: slategray;
-    border-style: solid;
-    border-width: medium;
     position: static;
     z-index: 0;
     display: flex;
     flex-flow: row wrap;
+    border-radius: 5px;
 }
 
 .board-card {
@@ -52,7 +50,8 @@ body {
     border-width: medium;
     position: relative; 
     z-index: 1;
-    flex: 0 0 32% 
+    flex: 0 0 32% ;
+    border-radius: 5px;
 }
 
 .answer-card {
@@ -62,12 +61,14 @@ body {
     border-style: solid;
     border-width: medium;
     position: relative; 
+    border-radius: 5px;
+    
 }
 
 .right-side-one {
     position: absolute;
     top: 20px;
-    right: 250px;
+    right: 350px;
     width: 250px;
     height: 250px;
     padding-top: 50px;
@@ -75,19 +76,27 @@ body {
     border-style: solid;
     border-width: medium;
     background-color: rgb(233, 232, 173);
+    border-radius: 20px;
 }
 
 .right-side-two {
     position: absolute;
     top: 400px;
-    right: 250px;
+    right: 350px;
     width: 250px;
     height: 300px;
     padding-top: 10px;
-    padding-left: 50px;
+    padding-left: 70px;
     border-style: solid;
     border-width: medium;
     background-color: rgb(233, 232, 173);
+    border-radius: 20px;
+}
+
+.banana-man {
+    position: absolute;
+    right: 20px;
+    bottom: 75px;
 }
 
 .hidden {
@@ -137,7 +146,7 @@ body {
 }
 
 .right-side-two, .board-card {
-	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background: linear-gradient(-45deg, #ee7752, #fd5e9b, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
 	animation: gradient 4s ease infinite;
 }

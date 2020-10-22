@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 const createLogIn = () => {
+
     const loginForm = document.createElement('form')
 
     const usernameInput = document.createElement('input')
@@ -133,7 +134,7 @@ const startPhase1 = () => {
     
     const answerId = i
     
-  
+    bananaMan()
 
 
 
@@ -310,6 +311,7 @@ const postScore = () => {
 }
 
 const endGameScreen = () => {
+
     console.log('got to end game')
     let body = document.querySelector('body')
     body.style = 'padding-left: 0px'
@@ -537,3 +539,16 @@ const roundLoop = () => {
     // else POST score and create game object with longest streak
 }
 
+
+
+const bananaMan = () => {
+    let body = document.querySelector('body')
+    let bananaManDiv = document.createElement('div')
+    bananaManDiv.classList.add('banana-man')
+
+    let bananaMan = document.createElement('img')
+    bananaMan.setAttribute('src','src/images/bananaman.gif')
+
+    body.append(bananaManDiv)
+    bananaManDiv.append(bananaMan)
+}
