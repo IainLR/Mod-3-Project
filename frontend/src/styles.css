@@ -161,8 +161,9 @@ body {
 	}
 	100% {
 		background-position: 0% 50%;
-	}
+    }
+}
 
-.your-results{
-    text-align: center
+.your-results {
+    text-align: center;
 }
