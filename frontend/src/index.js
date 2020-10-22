@@ -347,7 +347,8 @@ const leaderBoard = (div) => {
         console.log("unordered rounds", rounds)
         let sortedRounds = rounds.sort((a, b) => {return b.score - a.score})
         console.log("theoretically sorted rounds", sortedRounds)
-        sortedRounds.forEach(round => findUser(round, div))
+        let limitedRounds = sortedRounds.slice(0, 10)
+        limitedRounds.forEach(round => findUser(round, div))
     })
 
     function findUser(round, div){
