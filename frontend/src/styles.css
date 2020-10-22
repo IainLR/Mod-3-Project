@@ -103,6 +103,7 @@ body {
     height: 60px;
     position: absolute;
     width: 60px;
+    /* background-color: pink; */
 
     z-index: 9
 }
@@ -270,3 +271,44 @@ body {
   }
 
 
+
+
+.character-idle {
+    width: 400%;
+    height: 100%;
+    background-image: url('images/OrangeIdle.png');
+    background-size: 100%, 100%;
+    background-repeat:no-repeat;
+  
+    animation-name: char-idle;
+    animation-duration: 1.0s;
+    animation-timing-function: steps(3);
+    animation-iteration-count: infinite;
+    z-index:11;
+  
+    position: absolute;
+    left: 0;
+    top: 0;
+  
+}
+
+.character-idle__wrapper {
+    
+          overflow: hidden;
+          position: relative;
+
+          width: 115px;
+          height: 110px;
+          top: -27px;
+          left: -25px;
+          z-index: 9;
+                }
+
+@keyframes char-idle {
+    from { 
+      transform: translateX(0); 
+    }
+    to { 
+      transform: translateX(-75%); 
+    }
+  }

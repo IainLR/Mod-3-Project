@@ -330,25 +330,19 @@ const endGameScreen = () => {
     let tryAgnBtn = document.createElement('button')
     tryAgnBtn.innerText = "Try Again?"
     tryAgnBtn.classList.add('tryAgn-btn')
-    let homeScreenBtn = document.createElement('button')
-    homeScreenBtn.innerText = "Home Screen"
-    homeScreenBtn.classList.add('home-btn')
-
+    
 
     let endDiv = document.createElement('div')
     endDiv.classList.add('end-container')
     endDiv.append(gameOver, usernameScoreCombo)
-    body.append(endDiv, tryAgnBtn, homeScreenBtn)
+    body.append(endDiv, tryAgnBtn)
 
     tryAgnBtn.addEventListener('click', () => {
         console.log('try again click')
         // startPhase1Alt()
         location.reload()
     })
-    homeScreenBtn.addEventListener('click', () => {
-        console.log("home screen click")
-        // createLogIn()
-    })
+    
     leaderBoard(endDiv)
 }
 
@@ -446,10 +440,13 @@ const makeDodger = () => {
     dodger.style = "bottom: 400px; left: 350px"
 
     let charAnimationWrapper = document.createElement('div')
-    charAnimationWrapper.classList.add('character-animation__wrapper')
+    // charAnimationWrapper.classList.add('character-animation__wrapper')
 
     let charAnimation = document.createElement('div')
-    charAnimation.classList.add('character-animation')
+    // charAnimation.classList.add('character-animation')
+    // dodger.classList.add('character-idle')
+    charAnimationWrapper.className = 'character-idle__wrapper'
+    charAnimation.className = 'character-idle'
 
     let canvas = document.querySelector('.canvas')
     canvas.append(dodger)
@@ -519,6 +516,11 @@ const makeDodger = () => {
             moveDodgerUp()
         }
     });
+
+    document.addEventListener("keyup", function (e) {
+        charAnimationWrapper.className = 'character-idle__wrapper'
+        charAnimation.className = 'character-idle'
+    })
 }
 
 const scoreBox = () => {
