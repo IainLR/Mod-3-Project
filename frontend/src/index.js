@@ -7,11 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 const createLogIn = () => {
-
+    orangeIdle()
+    // bananaMan()
     const loginForm = document.createElement('form')
+    loginForm.className = 'log-in'
 
     const usernameInput = document.createElement('input')
     usernameInput.type = 'text'
+    usernameInput.className = 'start-btn'
     usernameInput.placeholder = "Enter Your Username"
 
     const formBtn = document.createElement('button')
@@ -21,7 +24,19 @@ const createLogIn = () => {
 
     loginForm.append(usernameInput, formBtn)
 
-    windowDiv.append(loginForm)
+
+    const logoDiv = document.createElement('div')
+    logoDiv.className = 'logo-div'
+    const logo = document.createElement('div')
+    logo.className = 'logo'
+    logo.innerHTML = 'FLIPCARD'
+
+
+
+
+
+    windowDiv.append(logoDiv, loginForm)
+    logoDiv.append(logo)
 
 
     loginForm.addEventListener('submit', (e) => {
@@ -415,7 +430,7 @@ const bodyCardsUp = () => {
 
     windowDiv.append(canvas)
 
-    let array = ['cards', 'altcards']
+    let array = ['cards', 'altcards', 'others']
     let i = array[Math.floor(Math.random() * array.length)]
     useThis = i
 
@@ -576,8 +591,6 @@ const roundLoop = () => {
     // else POST score and create game object with longest streak
 }
 
-
-
 const bananaMan = () => {
     let body = document.querySelector('body')
     let bananaManDiv = document.createElement('div')
@@ -586,6 +599,29 @@ const bananaMan = () => {
     let bananaMan = document.createElement('img')
     bananaMan.setAttribute('src','src/images/bananaman.gif')
 
-    body.append(bananaManDiv)
+    windowDiv.append(bananaManDiv)
     bananaManDiv.append(bananaMan)
+}
+
+
+
+const orangeIdle = () => {
+
+    let idleSizeDiv = document.createElement('div')
+    idleSizeDiv.className = 'idle-size'
+    let idleDiv = document.createElement('div')
+    idleDiv.className = 'title-idle__wrapper'
+    let idle = document.createElement('div')
+    idle.className = 'title-idle'
+    
+    // let titleBox = document.createElement('div')
+    // let boxImg = document.createElement('img')
+    // boxImg.className = 'title-box'
+    // boxImg.setAttribute('src', 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+
+    idleDiv.append(idle)
+    idleSizeDiv.append(idleDiv)
+    // titleBox.append(boxImg)
+    windowDiv.append(idleSizeDiv)
+
 }

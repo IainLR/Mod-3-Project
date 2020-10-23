@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_22_150913) do
+ActiveRecord::Schema.define(version: 2020_10_23_121724) do
 
   create_table "altcards", force: :cascade do |t|
     t.string "img1"
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 2020_10_22_150913) do
   create_table "characters", force: :cascade do |t|
     t.string "name"
     t.string "img1"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "others", force: :cascade do |t|
+    t.string "img1"
+    t.string "img2"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

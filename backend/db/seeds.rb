@@ -28,5 +28,15 @@ altbanana = Altcard.create(img1: 'images/banana.png', img2: 'https://www.pngkey.
 altpineapple = Altcard.create(img1: 'images/Pineapple.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
 altkiwi = Altcard.create(img1: 'images/kiwi.png', img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
 
+yoshi = Other.create(img1: 'images/yoshi.png' , img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+a = Other.create(img1: 'images/mario.png' , img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+c = Other.create(img1: 'images/Bowser.png' , img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+r = Other.create(img1: 'images/Daisy.png' , img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+f = Other.create(img1: 'images/luigi.png' , img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+d = Other.create(img1: 'images/waluigi.png' , img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+u = Other.create(img1: 'images/dk.png' , img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+n = Other.create(img1: 'images/wario.png' , img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+w = Other.create(img1: 'images/peach.png' , img2: 'https://www.pngkey.com/png/detail/168-1684674_super-mario-question-mark-clipart-super-mario-bros.png')
+
 puts "Success"
 
