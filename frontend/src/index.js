@@ -218,8 +218,14 @@ const startPhase3 = (answerId, thisSet) => {
     let dummyDodger = document.createElement('div');
     dummyDodger.style.cssText = dodgerInfo
     dummyDodger.classList.add('character')
-    dummyDodger.style.backgroundColor = "black";
+    // dummyDodger.style.backgroundColor = "black";
+
+    let dummyWrapper = document.createElement('div')
+    // dummyWrapper.className
+    let dummyAnimaition = document.createElement('div')
     canvas.append(dummyDodger)
+    dummyDodger.append(dummyWrapper)
+    dummyWrapper.append(dummyAnimaition)
 
 
     fetch(`http://localhost:3000/api/v1/${thisSet}/${answerId2}`)
@@ -247,7 +253,9 @@ const startPhase3 = (answerId, thisSet) => {
 
         if ((characterCoordinates.y > (cardCoordinates.y + cardCoordinates.height - 30)) || ((characterCoordinates.x + characterCoordinates.width) < cardCoordinates.x + 30) || ((characterCoordinates.y + characterCoordinates.height) < cardCoordinates.y + 30) || (characterCoordinates.x > (cardCoordinates.x + cardCoordinates.width - 30))) {
             console.log("WRONG!")
-            dummyDodger.style.backgroundColor = "red"
+            // dummyDodger.style.backgroundColor = "red"
+            dummyWrapper.className = 'dummy-animation-fail__wrapper'
+            dummyAnimaition.className = 'dummy-animation-fail'
             let oldValueStrike = parseInt(strikes.innerHTML)
             console.log(oldValueStrike)
             strikes.innerHTML = oldValueStrike + 1
@@ -261,7 +269,10 @@ const startPhase3 = (answerId, thisSet) => {
 
         }else{
             console.log("Success?!")
-            dummyDodger.style.backgroundColor = "green"
+            // dummyDodger.style.backgroundColor = "green"
+            dummyWrapper.className = 'dummy-animation-win__wrapper'
+            dummyAnimaition.className = 'dummy-animation-win'
+
             let streakCounter = parseInt(streak.innerHTML) + 1
             streak.innerHTML = streakCounter
             console.log(streakCounter)

@@ -312,3 +312,91 @@ body {
       transform: translateX(-75%); 
     }
   }
+
+
+
+  .dummy-animation-fail {
+    width: 325%;
+    height: 100%;
+    background-image: url('images/OrangeFail.png');
+    background-size: 100%, 100%;
+    background-repeat:no-repeat;
+  
+    animation-name: dummy-fail;
+    animation-duration: 1.0s;
+    animation-timing-function: steps(2);
+    animation-iteration-count: infinite;
+    z-index:11;
+  
+    position: absolute;
+    left: 0;
+    top: 0;
+  
+}
+
+
+
+.dummy-animation-fail__wrapper {
+    
+          overflow: hidden;
+          position: relative;
+
+          width: 115px;
+          height: 110px;
+          top: -27px;
+          left: -25px;
+          z-index: 9;
+                }
+
+@keyframes dummy-fail {
+    from { 
+      transform: translateX(0); 
+    }
+    to { 
+      transform: translateX(-66.666667%); 
+    }
+  }
+
+
+
+  .dummy-animation-win {
+    width: 400%;
+    height: 100%;
+    background-image: url('images/OrangeWin.png');
+    background-size: 100%, 100%;
+    background-repeat:no-repeat;
+  
+    animation-name: dummy-fail;
+    animation-duration: 1.0s;
+    animation-timing-function: steps(3);
+    animation-iteration-count: infinite;
+    z-index:11;
+  
+    position: absolute;
+    left: 0;
+    top: 0;
+  
+}
+
+
+
+.dummy-animation-win__wrapper {
+    
+          overflow: hidden;
+          position: relative;
+
+          width: 115px;
+          height: 110px;
+          top: -27px;
+          left: -25px;
+          z-index: 9;
+                }
+
+@keyframes dummy-fail {
+    from { 
+      transform: translateX(0); 
+    }
+    to { 
+      transform: translateX(-75%); 
+    }
+  }
