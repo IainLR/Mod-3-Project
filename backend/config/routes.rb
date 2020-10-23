@@ -5,6 +5,7 @@ namespace :api do
     resources :users
     resources :cards 
     resources :altcards
+    resources :others
     resources :rounds
     resources :characters 
   end
