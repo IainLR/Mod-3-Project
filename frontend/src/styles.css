@@ -1,7 +1,9 @@
 body {
    padding-left: 50px;
-   background-image: url("images/8bitbg.png");
-   background-size: 1000px, 800px;
+   background-image: url("images/pixelbg2.png");
+   /* background-size: 1000px, 800px; */
+   background-repeat: no-repeat;
+   background-size: cover;
    font-family: 'Press Start 2P', cursive;
 } 
 
@@ -9,7 +11,7 @@ body {
   position: absolute;
   width: 12%;
   height: 42%;
-  bottom: 185px;
+  bottom: 130px;
 }
 
 .logo-div {
@@ -135,7 +137,7 @@ body {
 
 .banana-man {
     position: absolute;
-    right: 20px;
+    right: 640px;
     bottom: 75px;
 }
 

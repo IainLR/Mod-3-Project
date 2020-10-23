@@ -347,7 +347,7 @@ const endGameScreen = () => {
     let userScore = document.querySelector('.score')
     let usernameScoreCombo = document.createElement('h2')
     usernameScoreCombo.classList.add('your-results')
-    usernameScoreCombo.innerText = `Name: ${userName.innerText}   Your Score: ${userScore.innerText}`
+    usernameScoreCombo.innerText = `NAME: ${userName.innerText}   YOUR SCORE: ${userScore.innerText}`
     body.innerHTML = ''
     let gameOver = document.createElement('h1')
     gameOver.innerText = "GAME OVER"
@@ -389,12 +389,11 @@ const leaderBoard = (div) => {
 
     function findUser(round, div){
             let nameScore = document.createElement('h3')
-            nameScore.innerText = `name: ${round.user.name}   Score: ${round.score}`
+            nameScore.innerText = `NAME: ${round.user.name}   SCORE: ${round.score}`
             nameScore.classList.add('nameScore')
             div.append(nameScore) 
     }
 }
-
 
 const clearPage = () => {
     windowDiv.innerHTML = ''
@@ -606,8 +605,6 @@ const bananaMan = () => {
     windowDiv.append(bananaManDiv)
     bananaManDiv.append(bananaMan)
 }
-
-
 
 const orangeIdle = () => {
 
