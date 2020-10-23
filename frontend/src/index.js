@@ -4,11 +4,14 @@ const urlBase = 'http://localhost:3000/api/v1/users'
 
 document.addEventListener("DOMContentLoaded", () => {
     createLogIn()
+    
 })
 
 const createLogIn = () => {
+    
     orangeIdle()
-    // bananaMan()
+    
+    
     const loginForm = document.createElement('form')
     loginForm.className = 'log-in'
 
@@ -128,7 +131,6 @@ const startPhase1 = () => {
     scoreBox()
 
     let thisSet = bodyCardsUp()
-    console.log('thisSet phase1', thisSet)
     
     // answer card logic
     const answerDiv = document.createElement('div')
@@ -144,7 +146,6 @@ const startPhase1 = () => {
     .then(obj => answerImage.setAttribute('src', obj.img2))
     
     answerDiv.append(answerImage)
-    console.log(showBox, 'AND', answerDiv)
     showBox.append(answerDiv)
     
     const answerId = i
@@ -177,7 +178,6 @@ const startPhase1Alt = () => {
         .then(obj => answerImage.setAttribute('src', obj.img2))
 
     answerDiv.append(answerImage)
-    console.log(showBox, 'AND', answerDiv)
     showBox.append(answerDiv)
 
     const answerId = i
@@ -216,7 +216,7 @@ const startPhase2 = (answerId, thisSet) => {
     showBox.append(answerDiv)
 
     makeDodger()
-    console.log(answerId)
+    console.log('answer id:', answerId)
 
     setTimeout(startPhase3, 8000, answerId, thisSet)
 }
@@ -267,7 +267,7 @@ const startPhase3 = (answerId, thisSet) => {
         function bottom(coordinates) { return coordinates.y + coordinates.height }
 
         if ((characterCoordinates.y > (cardCoordinates.y + cardCoordinates.height - 30)) || ((characterCoordinates.x + characterCoordinates.width) < cardCoordinates.x + 30) || ((characterCoordinates.y + characterCoordinates.height) < cardCoordinates.y + 30) || (characterCoordinates.x > (cardCoordinates.x + cardCoordinates.width - 30))) {
-            console.log("WRONG!")
+
             // dummyDodger.style.backgroundColor = "red"
             dummyWrapper.className = 'dummy-animation-fail__wrapper'
             dummyAnimaition.className = 'dummy-animation-fail'
@@ -277,13 +277,12 @@ const startPhase3 = (answerId, thisSet) => {
             streak.innerHTML = '0'
             if (strikes.innerHTML >= 3) {
                 setTimeout(postScore, 5000)
-                return console.log('please just stop it...')
             } else {
                 setTimeout(roundLoop, 5000)
             }
 
         }else{
-            console.log("Success?!")
+            
             // dummyDodger.style.backgroundColor = "green"
             dummyWrapper.className = 'dummy-animation-win__wrapper'
             dummyAnimaition.className = 'dummy-animation-win'
@@ -340,6 +339,7 @@ const postScore = () => {
 
 const endGameScreen = () => {
 
+    
     console.log('got to end game')
     let body = document.querySelector('body')
     body.style = 'padding-left: 0px'
@@ -352,17 +352,21 @@ const endGameScreen = () => {
     let gameOver = document.createElement('h1')
     gameOver.innerText = "GAME OVER"
     gameOver.classList.add('game-over')
-
+    
+    let gameOver2 = document.createElement('h2')
+    gameOver2.innerText = "JUICED"
+    gameOver2.classList.add('game-over2')
+    
     let tryAgnBtn = document.createElement('button')
     tryAgnBtn.innerText = "Try Again?"
     tryAgnBtn.classList.add('tryAgn-btn')
     
-
+    
     let endDiv = document.createElement('div')
     endDiv.classList.add('end-container')
-    endDiv.append(gameOver, usernameScoreCombo)
+    endDiv.append(gameOver, gameOver2, usernameScoreCombo)
     body.append(endDiv, tryAgnBtn)
-
+    
     tryAgnBtn.addEventListener('click', () => {
         console.log('try again click')
         // startPhase1Alt()
@@ -370,6 +374,7 @@ const endGameScreen = () => {
     })
     
     leaderBoard(endDiv)
+    juiceCup()
 }
 
 const leaderBoard = (div) => {
@@ -552,7 +557,6 @@ const makeDodger = () => {
 const scoreBox = () => {
     const going = document.querySelector('right-side-two')
 
-    console.log(going)
 
     if (going === null) {
 
@@ -624,4 +628,13 @@ const orangeIdle = () => {
     // titleBox.append(boxImg)
     windowDiv.append(idleSizeDiv)
 
+}
+
+const juiceCup = () => {
+
+    const container = document.querySelector('.end-container')
+    const juice = document.createElement('img')
+    juice.setAttribute('src', 'src/images/Juice.png')
+    juice.className = 'juice'
+    container.append(juice)
 }

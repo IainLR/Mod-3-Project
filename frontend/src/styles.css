@@ -4,6 +4,14 @@ body {
    background-size: 1000px, 800px;
    font-family: 'Press Start 2P', cursive;
 } 
+
+.juice {
+  position: absolute;
+  width: 12%;
+  height: 42%;
+  bottom: 185px;
+}
+
 .logo-div {
   margin: auto;
   width: 50%;
@@ -157,6 +165,11 @@ body {
 .game-over{
     text-align: center
 }
+
+.game-over2{
+  text-align: center;
+  color: orange
+}
 .home-btn {
     text-align: center;
     position: absolute;
@@ -169,7 +182,7 @@ body {
   height: 40px;
   margin: auto;
   position: absolute;
-  left: 600px;
+  left: 710px;
   
 }
 .end-container{
@@ -182,7 +195,8 @@ body {
 
 
 .right-side-two, .board-card {
-	background: linear-gradient(-45deg, #ee7752, #fd5e9b, #23a6d5, #23d5ab);
+  background: linear-gradient(-45deg, #ee7752, #fd5e9b, #23a6d5, #23d5ab); 
+  /* background: linear-gradient(-45deg, #fafaf8, #0e92eb, #107410, #ff8b17); */
 	background-size: 400% 400%;
 	animation: gradient 4s ease infinite;
 }
@@ -356,15 +370,15 @@ body {
 
 
   .dummy-animation-fail {
-    width: 325%;
+    width: 400%;
     height: 100%;
-    background-image: url('images/OrangeFail.png');
+    background-image: url('images/OrangeFailNewcopy.png');
     background-size: 100%, 100%;
     background-repeat:no-repeat;
   
     animation-name: dummy-fail;
-    animation-duration: 6s;
-    animation-timing-function: steps(2);
+    animation-duration: 5s;
+    animation-timing-function: steps(3);
     animation-iteration-count: infinite;
     z-index:11;
   
@@ -393,7 +407,7 @@ body {
       transform: translateX(0); 
     }
     to { 
-      transform: translateX(-66.666667%); 
+      transform: translateX(75%); 
     }
   }
 
